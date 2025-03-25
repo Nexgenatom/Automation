@@ -7,8 +7,10 @@ import org.junit.runner.RunWith;
         features = "src/test/java/org/featurefiles",
         glue = {"stepdef"},
         plugin = {
-                "pretty",
-                "html:target/cucumber-html-report.html",
+        		"pretty",
+                "io.qameta.allure.cucumber7jvm.AllureCucumber7Jvm",
+//                "pretty",
+//                "html:target/cucumber-html-report.html",
                 "json:target/cucumber.json",
                 "junit:target/cucumber.xml"
         },
