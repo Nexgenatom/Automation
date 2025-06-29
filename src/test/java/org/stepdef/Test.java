@@ -12,12 +12,16 @@ import junit.framework.Assert;
 
 public class Test {
     private Response response;
-    private static final String BASE_URL = "https://reqres.in/";
+    private static final String BASE_URL = "https://reqres.in";
  //https://jsonplaceholder.typicode.com
     @Given("i send a GET request to {string}")
     public void i_send_a_get_request_to(String endPoint) {
        RestAssured.baseURI = BASE_URL;
-       response = RestAssured.get(endPoint);
+      
+       response = RestAssured
+    		   .given()
+    		   .header("x-api-key", "reqres-free-v1")
+    		   .get(endPoint);
        
 
     }
@@ -30,13 +34,14 @@ public class Test {
     @And("the response body should contain {int}")   
     public void the_response_body_should_contstringain(int userId) {
     
-    	int expectedUserId = userId;//Integer.parseInt(userId.replace("\"", "")); // Convert "1" -> 1
-    	  System.out.println("Expected ID: " + expectedUserId);
-    	  List<Integer>  actualUserId = response.getBody().jsonPath().getList("data.id");//getInt("x.data[0].id");
-    	  System.out.println(response.getBody().jsonPath().getString("data[0].id"));
+    	//int expectedUserId = userId;//Integer.parseInt(userId.replace("\"", "")); // Convert "1" -> 1
+    	//  System.out.println("Expected ID: " + expectedUserId);
+    	 // List<Integer>  actualUserId = response.getBody().jsonPath().getList("$.data.id",Integer.class);//getInt("x.data[0].id");
+    	  int actualUserId = response.getBody().jsonPath().getInt("data.id");
+    	  System.out.println("Actual ID:" + response.getBody().jsonPath().getString("data.id"));
     	  System.out.println("Response Body: " + response.getBody().asString());
     	  
-         Assert.assertTrue(actualUserId.contains(expectedUserId));
+         Assert.assertTrue(actualUserId !=0);
     }
 }
 

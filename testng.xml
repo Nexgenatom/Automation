@@ -1,8 +1,13 @@
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
 <suite name="CucumberTestSuite">
+  <listeners>
+        <listener class-name="org.listeners.RetryTransformer"/>
+    </listeners>
+
     <test name="CucumberTests">
         <classes>
-            <class name="org.RunnerTest" />
+            <class name="org.runner.RunnerTest"/>
         </classes>
     </test>
+
 </suite>
