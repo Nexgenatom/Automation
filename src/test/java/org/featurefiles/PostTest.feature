@@ -19,7 +19,7 @@
 
 Feature: Post API Testing with RestAssured and Cucumber
 
-
+@smoke
   Scenario: Verify that the User is added successfully
     Given I have valid Username <username> and Job <job>
     When I send a post reequest to create the user
